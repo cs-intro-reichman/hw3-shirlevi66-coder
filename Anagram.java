@@ -69,14 +69,14 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		String result = "";
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (Character.isLetter(c) || c == ' ') {
-                result += Character.toLowerCase(c);
-            }
+    for (int i = 0; i < str.length(); i++) {
+        char c = str.charAt(i);
+        if (Character.isLetter(c)) {
+            result += Character.toLowerCase(c);
         }
-        return result;
     }
+    return result;
+}
 	
 	public static String randomAnagram(String str) {
 		 char[] chars = str.toCharArray();
