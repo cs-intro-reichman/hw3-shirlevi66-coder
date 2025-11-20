@@ -30,40 +30,30 @@ public class Anagram {
 	
     public static boolean isAnagram(String str1, String str2) {
 
-   	 str1 = preProcess(str1);
-   	 str2 = preProcess(str2);
+   	String s1 = preProcess(str1).replace(" ", "");
+	String s2 = preProcess(str2).replace(" ", "");
 
-   	 	if (str1.length() != str2.length()) {
-        return false;
-   		 }
+	if (s1.length() != s2.length()) return false;
+	if (s1.length() == 0) return true;
 
-    	if (str1.length() == 0) { 
-        return true;
-   		 }
+	int[] counts = new int[26];
 
-    int[] counts = new int[26];
+	for (int i = 0; i < s1.length(); i++) {
+    char c1 = s1.charAt(i);
+    	if (c1 >= 'a' && c1 <= 'z') counts[c1 - 'a']++;
+	}
 
-    for (int i = 0; i < str1.length(); i++) {
-        char c1 = str1.charAt(i);
-        char c2 = str2.charAt(i);
+	for (int i = 0; i < s2.length(); i++) {
+    char c2 = s2.charAt(i);
+    if (c2 >= 'a' && c2 <= 'z') counts[c2 - 'a']--;
+	}
 
-        if (c1 >= 'a' && c1 <= 'z') {
-            counts[c1 - 'a']++;
-        }
-        if (c2 >= 'a' && c2 <= 'z') {
-            counts[c2 - 'a']--;
-        }
-    }
+	for (int c : counts) {
+    if (c != 0) return false;
+	}
 
-    for (int k = 0; k < 26; k++) {
-        if (counts[k] != 0) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
+	return true;
+	}
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
